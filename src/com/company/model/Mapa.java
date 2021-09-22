@@ -1,5 +1,5 @@
 package com.company.model;
 
 public class Mapa {
-    private Nodo[][] cityMap;
+    private Nodo[][] mapa;
 }

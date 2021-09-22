@@ -5,13 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Ruta {
-    private List<Nodo> nodos;
+    private final List<Pedido> pedidos;
+    private List<Integer> puntosX;
+    private List<Integer> puntosY;
     private int distancia;
 
-    public Ruta(List<Nodo> nodos) {
-        this.nodos = new ArrayList<>(nodos);
-        Collections.shuffle(this.nodos);
+
+    public Ruta(List<Pedido> pedidos) {
+        this.pedidos = new ArrayList<>(pedidos);
+        Collections.shuffle(this.pedidos);
     }
+    /*
     public Nodo getNodo(int index){
         return nodos.get(index);
     }
@@ -29,22 +33,24 @@ public class Ruta {
         distancia = distanciaTotal;
         return distanciaTotal;
     }
+    */
+
 
     public Ruta duplicar(){
-        return new Ruta(new ArrayList<>(nodos));
+        return new Ruta(new ArrayList<>(pedidos));
     }
 
     public int numClientes(){
-        return nodos.size();
+        return pedidos.size();
     }
 
-    public List<Nodo> getNodos() {
-        return nodos;
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
     @Override
     public String toString() {
-        return   nodos +
+        return   pedidos +
                 ", distancia=" + distancia ;
     }
 }

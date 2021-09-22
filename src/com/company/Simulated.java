@@ -1,9 +1,6 @@
 package com.company;
 
-import com.company.model.Helper;
-import com.company.model.Nodo;
-import com.company.model.Ruta;
-import com.company.model.Vehicle;
+import com.company.model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +11,7 @@ public class Simulated {
     private static final double factor = 0.995;
 
     public static void main(String[] args) {
-        List<Nodo> clientes = new ArrayList<>();
+        List<Pedido> clientes = new ArrayList<>();
         List<Vehicle> camiones= new ArrayList<>();
 
         Vehicle camion1 = new Vehicle(1,20,1,20,"asd123",1);
@@ -23,7 +20,7 @@ public class Simulated {
         camiones.add(camion1);
         camiones.add(camion2);
        // Vehicle camion3 = new Vehicle(1,20,1,20,"asd123",1);
-
+/*
         Nodo cliente1 = new Nodo(100, 100,10,4);
         clientes.add(cliente1);
 
@@ -46,7 +43,7 @@ public class Simulated {
             demandas[i] = cliente.getPedido();
         }
 
-        /*
+
         *
             Cargar en un arreglo la demanda de cada cliente
             Verificar que cada cliente pueda rutearse:
@@ -57,7 +54,7 @@ public class Simulated {
         *
         *
         *
-        * */
+        *
 
 
         Ruta current = new Ruta(clientes);
@@ -87,7 +84,7 @@ public class Simulated {
         }
 
         System.out.println("Distancia Recorrida: " + best.getDistanciaRuta());
-        System.out.println("Tour: " + best);
+        System.out.println("Tour: " + best);*/
     }
 }
 

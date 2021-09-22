@@ -52,6 +52,12 @@ public class Nodo {
         return actual.compareTo(this.fechaIniBloqueo)>0 && actual.compareTo(this.fechaFinBloqueo)<0;
     }
 
+    public boolean isBloquead(Date fecha){
+        if(this.fechaIniBloqueo ==null || this.fechaFinBloqueo==null)
+            return false;
+        return fecha.compareTo(this.fechaIniBloqueo)>0 && fecha.compareTo(this.fechaFinBloqueo)<0;
+    }
+
     @Override
     public String toString() {
         return "Nodo{" +
