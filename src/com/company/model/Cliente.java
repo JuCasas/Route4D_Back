@@ -1,6 +1,6 @@
-package com.company;
+package com.company.model;
 
-public class Cliente extends Usuario{
+public class Cliente extends Usuario {
     private String razonSocial;
     private int ruc;
     private int telef;
