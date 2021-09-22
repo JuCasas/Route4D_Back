@@ -22,7 +22,8 @@ public class Ruta {
 
         for(int i =0;i<numClientes();i++) {
             Nodo inicio = getNodo(i);
-            Nodo fin = getNodo(i + 1 < numClientes() ? i+1 : 0);
+            Nodo fin = getNodo(i + 1 < numClientes() ? i+1 : 0); //SE DEBE ACTUALIZAR POR QUE ES MAS DE UN VEHICULO
+            //POR CLIENTE
             distanciaTotal += Helper.distancia(inicio, fin);
         }
         distancia = distanciaTotal;

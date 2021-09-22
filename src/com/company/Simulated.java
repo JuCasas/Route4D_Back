@@ -36,15 +36,31 @@ public class Simulated {
         Nodo cliente4 = new Nodo(200, 100,15);
         clientes.add(cliente4);
 
+        int num = clientes.size();
+        int matrizDistancias [][] = Helper.calcMatriz(clientes);
+        /*
+        * Solicitar el ingreso de los parámetros al usuario: , 1 y 2
+        Calcular la matriz de distancias entre todos los clientes
+        Cargar en un arreglo las ventanas de tiempo de cada
+            cliente
+            Cargar en un arreglo la demanda de cada cliente
+            Verificar que cada cliente pueda rutearse:
+
+ Iniciar la ruta k desde el depósito. Definir
+଴௞ ଴
+ Definir q(k) = Q
+        *
+        *
+        *
+        * */
+
+
         Ruta current = new Ruta(clientes);
         Ruta best = current.duplicar();
 
 
         for (double t = temperatura; t > 1; t *= factor) {
-            for (int i = 0;i<2;i++){
 
-
-            }
 
             Ruta vecino = current.duplicar();
 
@@ -69,3 +85,5 @@ public class Simulated {
         System.out.println("Tour: " + best);
     }
 }
+
+

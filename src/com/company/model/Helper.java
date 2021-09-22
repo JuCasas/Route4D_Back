@@ -1,5 +1,7 @@
 package com.company.model;
 
+import java.util.List;
+
 public class Helper {
     public static double probabilidad(double d1, double d2, double temp) {
         if (d2 < d1) return 1;
@@ -10,5 +12,23 @@ public class Helper {
         int xDist = Math.abs(n1.getX() - n2.getX());
         int yDist = Math.abs(n1.getY() - n2.getY());
         return Math.sqrt(xDist * xDist + yDist * yDist);
+    }
+
+    public static int[][] calcMatriz(List<Nodo> clientes){
+        int num =clientes.size();
+        int matrizDistancias [][] = new int[num][num];
+
+        for(int i = 0;i < num;i++){
+            Nodo nodoi = clientes.get(i);
+            for(int j = 0;j< num;j++){
+                //dist de cliente i a cliente j
+                Nodo nodoj = clientes.get(j);
+                //Distancia manhattan
+                int distancia = (nodoi.getX()-nodoj.getX()) +(nodoi.getY()- nodoj.getY());
+                matrizDistancias[i][j]=distancia;
+            }
+        }
+
+        return matrizDistancias;
     }
 }
