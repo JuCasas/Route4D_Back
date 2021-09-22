@@ -3,10 +3,12 @@ package com.company;
 public class Nodo {
     private int x;
     private int y;
+    private int pedido;
 
-    public Nodo(int x,int y){
+    public Nodo(int x,int y,int pedido){
         this.x = x;
         this.y = y;
+        this.pedido = pedido;
     }
 
     public int getX() {
@@ -17,11 +19,16 @@ public class Nodo {
         return y;
     }
 
+    public int getPedido() {
+        return pedido;
+    }
+
     @Override
     public String toString() {
-        return "{" +
-                 x +
-                ", " + y +
+        return "Nodo{" +
+                "x=" + x +
+                ", y=" + y +
+                ", pedido=" + pedido +
                 '}';
     }
 }
