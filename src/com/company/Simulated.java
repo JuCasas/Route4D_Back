@@ -24,25 +24,30 @@ public class Simulated {
         camiones.add(camion2);
        // Vehicle camion3 = new Vehicle(1,20,1,20,"asd123",1);
 
-        Nodo cliente1 = new Nodo(100, 100,10);
+        Nodo cliente1 = new Nodo(100, 100,10,4);
         clientes.add(cliente1);
 
-        Nodo cliente2 = new Nodo(150, 200,6);
+        Nodo cliente2 = new Nodo(150, 200,6,4);
         clientes.add(cliente2);
 
-        Nodo cliente3 = new Nodo(100, 200,4);
+        Nodo cliente3 = new Nodo(100, 200,4,4);
         clientes.add(cliente3);
 
-        Nodo cliente4 = new Nodo(200, 100,15);
+        Nodo cliente4 = new Nodo(200, 100,15,4);
         clientes.add(cliente4);
 
         int num = clientes.size();
         int matrizDistancias [][] = Helper.calcMatriz(clientes);
+        int tiempos[] = new int [num];
+        int demandas[] = new int [num];
+        for(int i = 0; i< num;i++){
+            Nodo cliente = clientes.get(i);
+            tiempos[i]=cliente.getLimite();
+            demandas[i] = cliente.getPedido();
+        }
+
         /*
-        * Solicitar el ingreso de los parámetros al usuario: , 1 y 2
-        Calcular la matriz de distancias entre todos los clientes
-        Cargar en un arreglo las ventanas de tiempo de cada
-            cliente
+        *
             Cargar en un arreglo la demanda de cada cliente
             Verificar que cada cliente pueda rutearse:
 

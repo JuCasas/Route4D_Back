@@ -4,11 +4,13 @@ public class Nodo {
     private int x;
     private int y;
     private int pedido;
+    private int limite;
 
-    public Nodo(int x,int y,int pedido){
+    public Nodo(int x,int y,int pedido,int limite){
         this.x = x;
         this.y = y;
         this.pedido = pedido;
+        this.limite = limite;
     }
 
     public int getX() {
@@ -23,12 +25,17 @@ public class Nodo {
         return pedido;
     }
 
+    public int getLimite() {
+        return limite;
+    }
+
     @Override
     public String toString() {
         return "Nodo{" +
                 "x=" + x +
                 ", y=" + y +
                 ", pedido=" + pedido +
+                ", limite=" + limite +
                 '}';
     }
 }
