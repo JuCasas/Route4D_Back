@@ -1,11 +1,5 @@
 package com.company.model;
 
 public class Mapa {
-    private int x;
-    private int y;
-
-    public Mapa(int x,int y){
-        this.x = x;
-        this.y = y;
-    }
+    private Nodo[][] cityMap;
 }

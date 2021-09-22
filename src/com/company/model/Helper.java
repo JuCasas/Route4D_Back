@@ -1,5 +1,7 @@
 package com.company.model;
-
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 public class Helper {
@@ -30,5 +32,12 @@ public class Helper {
         }
 
         return matrizDistancias;
+    }
+    public static class DateUtils {
+        public static Date convertToDateViaInstant(LocalDateTime dateToConvert) {
+            return Date
+                    .from(dateToConvert.atZone(ZoneId.systemDefault())
+                            .toInstant());
+        }
     }
 }

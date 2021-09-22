@@ -27,13 +27,13 @@ public class Simulated {
         Nodo cliente1 = new Nodo(100, 100,10,4);
         clientes.add(cliente1);
 
-        Nodo cliente2 = new Nodo(150, 200,6,4);
+        Nodo cliente2 = new Nodo(150, 200,6,3);
         clientes.add(cliente2);
 
-        Nodo cliente3 = new Nodo(100, 200,4,4);
+        Nodo cliente3 = new Nodo(100, 200,4,2);
         clientes.add(cliente3);
 
-        Nodo cliente4 = new Nodo(200, 100,15,4);
+        Nodo cliente4 = new Nodo(200, 100,15,1);
         clientes.add(cliente4);
 
         int num = clientes.size();
