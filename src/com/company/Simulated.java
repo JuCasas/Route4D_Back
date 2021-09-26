@@ -11,14 +11,14 @@ public class Simulated {
     private static final double factor = 0.995;
 
     public static void main(String[] args) {
-        List<Pedido> clientes = new ArrayList<>();
-        List<Vehicle> camiones= new ArrayList<>();
+       //List<Pedido> clientes = new ArrayList<>();
+        //List<Vehicle> camiones= new ArrayList<>();
 
-        Vehicle camion1 = new Vehicle(1,20,1,20,"asd123",1);
+        //Vehicle camion1 = new Vehicle(1,20,1,20,"asd123",1);
 
-        Vehicle camion2 = new Vehicle(1,15,1,20,"asd323",1);
-        camiones.add(camion1);
-        camiones.add(camion2);
+        //ehicle camion2 = new Vehicle(1,15,1,20,"asd323",1);
+        //camiones.add(camion1);
+        //camiones.add(camion2);
        // Vehicle camion3 = new Vehicle(1,20,1,20,"asd123",1);
 /*
         Nodo cliente1 = new Nodo(100, 100,10,4);

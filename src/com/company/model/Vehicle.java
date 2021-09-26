@@ -7,15 +7,16 @@ public class Vehicle {
     private int peso;
     private String placa;
     private int estado;
+    public double velocidad;
 
-    public  Vehicle(int id,int capacidad,int tipo,int peso,String placa,int estado){
+    public  Vehicle(int id,int capacidad,int tipo,int peso,String placa,int estado,double velocidad){
         this.id = id;
         this.capacidad=capacidad;
         this.tipo = tipo;
         this.placa = placa;
         this.estado = estado;
         this.peso = peso;
-
+        this.velocidad = velocidad;
     }
     public int getCapacidad() {
         return capacidad;

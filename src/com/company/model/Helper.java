@@ -18,7 +18,7 @@ public class Helper {
 
     public static int[][] calcMatriz(List<Nodo> clientes){
         int num =clientes.size();
-        int matrizDistancias [][] = new int[num][num];
+        int[][] matrizDistancias = new int[num][num];
 
         for(int i = 0;i < num;i++){
             Nodo nodoi = clientes.get(i);
