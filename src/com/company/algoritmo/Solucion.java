@@ -11,4 +11,5 @@ public class Solucion {
     public List<Pedido> listaPedidos;
     public List<Vehicle> listaVehiculos;
     public List<Cluster> listaClusters;
+
 }
