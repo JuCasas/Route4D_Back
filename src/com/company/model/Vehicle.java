@@ -2,14 +2,15 @@ package com.company.model;
 
 public class Vehicle {
     private int id;
-    private int capacidad;
+    private double capacidad;
     private int tipo;
-    private int peso;
+    private double peso;
+    private double pesoCarga;
     private String placa;
     private int estado;
     public double velocidad;
 
-    public  Vehicle(int id,int capacidad,int tipo,int peso,String placa,int estado,double velocidad){
+    public  Vehicle(int id,double capacidad,int tipo,double peso,String placa,int estado,double velocidad){
         this.id = id;
         this.capacidad=capacidad;
         this.tipo = tipo;
@@ -23,7 +24,7 @@ public class Vehicle {
 
     }
 
-    public int getCapacidad() {
+    public double getCapacidad() {
         return capacidad;
     }
 
@@ -43,8 +44,36 @@ public class Vehicle {
         return placa;
     }
 
-    public int getPeso() {
+    public double getPeso() {
         return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public double getVelocidad() {
+        return velocidad;
+    }
+
+    public void setPesoCarga(double pesoCarga) {
+        this.pesoCarga = pesoCarga;
+    }
+
+    public void setCapacidad(double capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setVelocidad(double velocidad) {
+        this.velocidad = velocidad;
     }
 
     @Override

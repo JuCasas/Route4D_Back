@@ -71,6 +71,9 @@ public class Ruta {
     }
     */
 
+    public List<Integer> getCamino() {
+        return camino;
+    }
 
     public Ruta duplicar(){
         return new Ruta(new ArrayList<>(pedidos));

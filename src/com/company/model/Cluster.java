@@ -69,6 +69,10 @@ public class Cluster implements Comparable<Cluster>{
         this.pedidos = pedidos;
     }
 
+    public void setVehiculo(Vehicle vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
     @Override
     public int compareTo(Cluster c) {
         if( this.primerPedido.getTiempoLimite() == c.primerPedido.getTiempoLimite() ){
