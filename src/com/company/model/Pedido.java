@@ -6,20 +6,29 @@ import java.util.Date;
 public class Pedido implements Comparable<Pedido> {
     private final int idPedido;
     private int idCluster;
-    private final Cliente cliente;
-    private final int idRuta;
-    private final int cordX;
-    private final int cordY;
-    private final Date fechaPedido;
-    private final int tiempoLimite;
-    private final Date fechaEntrega;
-    private final boolean penalidad;
-    private final int cantidad;
-    private final double costoPenalidad;
-    private final long duracion;
+    private  Cliente cliente;
+    private  int idRuta;
+    private  int cordX;
+    private  int cordY;
+    private  Date fechaPedido;
+    private  int tiempoLimite;
+    private  Date fechaEntrega;
+    private  boolean penalidad;
+    private  int cantidad;
+    private  double costoPenalidad;
+    private  long duracion;
+    private int tiempoEntrega;
 
     public boolean isPenalidad() {
         return penalidad;
+    }
+
+    public Pedido(int id, int x, int y, int cantidad, int tiempoLimite){
+        this.idPedido = id;
+        this.cordX = x;
+        this.cordY = y;
+        this.cantidad = cantidad;
+        this.tiempoLimite = tiempoLimite;
     }
 
     public Pedido(int idPedido,Cliente cliente, int idRuta,int cordX,int cordY, Date fechaPedido,int tiempoLimite,
@@ -85,6 +94,10 @@ public class Pedido implements Comparable<Pedido> {
 
     public int getIdCluster() {
         return idCluster;
+    }
+
+    public void setIdCluster(int idCluster) {
+        this.idCluster = idCluster;
     }
 
     @Override

@@ -8,12 +8,12 @@ import java.util.PriorityQueue;
 
 public class Dijkstra {
     private final int MAX = 3500;  //maximo numero de vértices
-    private final int INF = Integer.MAX_VALUE;  //definimos un valor grande que represente la distancia infinita inicial, basta conque sea superior al maximo valor del peso en alguna de las aristas
+    private final int INF = Integer.MAX_VALUE;  //
 
     private final List<List< Nodo >> adyacencia = new ArrayList<List<Nodo>>(); //lista de adyacencia
     private final int[] distancia = new int[ MAX ];          //distancia[ u ] distancia de vértice inicial a vértice con ID = u
     private final boolean[] visitado = new boolean[ MAX ];   //para vértices visitados
-    private final PriorityQueue< Nodo > cola = new PriorityQueue<Nodo>(); //priority queue propia de Java, usamos el comparador definido para que el de menor valor este en el tope
+    private final PriorityQueue< Nodo > cola = new PriorityQueue<>(); //priority queue propia de Java, usamos el comparador definido para que el de menor valor este en el tope
     private int V;                                      //numero de vertices
     private final int[] previo = new int[ MAX ];              //para la impresion de caminos
     private boolean dijkstraEjecutado;
@@ -28,21 +28,22 @@ public class Dijkstra {
         this.callesBloqueadas = bloqueos;
     }
 
-    //función de inicialización
+    //inicializacion previa
     private void init(){
-        for( int i = 0 ; i <= V ; ++i ){
-            distancia[ i ] = INF;  //inicializamos todas las distancias con valor infinito
-            visitado[ i ] = false; //inicializamos todos los vértices como no visitados
-            previo[ i ] = -1;      //inicializamos el previo del vertice i con -1
+        int i;
+        for(i=0;i<=V ;i++){
+            distancia[i] = INF;
+            visitado[i] = false; //No visitado
+            previo[i] = -1;
         }
     }
 
-    //Paso de relajacion
-    private void relajacion( int actual , int adyacente , int peso ){
+    //edge relaxation   -- fuente de shortest path algorithm
+    private void relaxation(int actual , int adyacente , int peso ){
         //Si la distancia del origen al vertice actual + peso de su arista es menor a la distancia del origen al vertice adyacente
         if( distancia[ actual ] + peso < distancia[ adyacente ] ){
-            distancia[ adyacente ] = distancia[ actual ] + peso;  //relajamos el vertice actualizando la distancia
-            previo[ adyacente ] = actual;                         //a su vez actualizamos el vertice previo
+            distancia[ adyacente ] = distancia[ actual ] + peso;  //actualizamos peso
+            previo[ adyacente ] = actual;                         //el vertice previo
             cola.add( new Nodo( adyacente , distancia[ adyacente ] ) ); //agregamos adyacente a la cola de prioridad
         }
     }
@@ -66,7 +67,7 @@ public class Dijkstra {
                 if(estaBloqueada) peso = INF;
                 else peso = adyacencia.get( actual ).get( i ).segundo;        //peso de la arista que une actual con adyacente ( actual , adyacente )
                 if( !visitado[ adyacente ] ){        //si el vertice adyacente no fue visitado
-                    relajacion( actual , adyacente , peso ); //realizamos el paso de relajacion
+                    relaxation( actual , adyacente , peso ); //relaxation
                 }
             }
         }
@@ -83,34 +84,30 @@ public class Dijkstra {
             System.out.println("Es necesario ejecutar el algorithmo de Dijkstra antes de poder imprimir el camino mas corto");
             return;
         }
-        print( destino, ruta, tipo );
-        //   System.out.printf("\n");
+        imprimeRuta( destino, ruta, tipo );
     }
 
     //Impresion del camino mas corto desde el vertice inicial y final ingresados
-    private void print(int destino, Ruta ruta, int tipo ){
+    private void imprimeRuta(int destino, Ruta ruta, int tipo ){
         if( previo[ destino ] != -1 ){    //si aun poseo un vertice previo
-            print( previo[ destino ], ruta, tipo );  //recursivamente sigo explorando
+            imprimeRuta(previo[destino],ruta,tipo);  //recursivamente sigo explorando
         }
         if( previo[ destino ] != -1 ){
+
             if(tipo == 1) ruta.addNodo(destino);
             else ruta.addNodoRetorno(destino);
         }
         //   System.out.printf("%d " , destino );        //terminada la recursion imprimo los vertices recorridos
     }
 
-    public int getNumberOfVertices() {
+    public int getNumeroVerties() {
         return V;
     }
 
-    public void setNumberOfVertices(int numeroDeVertices) {
-        V = numeroDeVertices;
-    }
-
     private boolean estaBloqueada(int tiempoMinutos, int nodoId){
-        for( Bloqueos par : callesBloqueadas){
-            if( ( tiempoMinutos >= par.getMinutosInicio() ) && ( tiempoMinutos < par.getMinutosFin() ) ){
-                return par.estaNodo(nodoId);
+        for( Bloqueos bloqueo : callesBloqueadas){
+            if( ( tiempoMinutos >= bloqueo.getInicio()) && ( tiempoMinutos < bloqueo.getFin() ) ){
+                return bloqueo.estaNodo(nodoId);
             }
         }
         return false;

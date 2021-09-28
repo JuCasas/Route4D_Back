@@ -19,6 +19,14 @@ public class Bloqueos {
         nodos.add(id);
     }
 
+    public int getInicio() {
+        return inicio;
+    }
+
+    public int getFin() {
+        return fin;
+    }
+
     public boolean estaNodo(int nodoId){
         return nodos.contains(nodoId);
     }
