@@ -10,10 +10,10 @@ public class Kmeans {
     //a mayor precision mayor error
     static final Double fTiempo = 1.5;
     static final Double fPrecision = 0.0;
-    private int cantVehiculos1;
-    private int cantVehiculos2;
-    private int cantVehiculos3;
-    private int cantVehiculos4;
+    private final int cantVehiculos1;
+    private final int cantVehiculos2;
+    private final int cantVehiculos3;
+    private final int cantVehiculos4;
 
     public Kmeans(int cantidad1,int cantidad2,int cantidad3,int cantidad4){
         this.cantVehiculos1=cantidad1;
@@ -185,14 +185,14 @@ public class Kmeans {
             // Initialize Sum of Squared Errors to max, we'll lower it at each iteration
             limpiaPedidos(clusters);
             // Select K initial centroids
-            kmeanspp(clusters);
+            kmpp(clusters);
             int iterations = 30;
             while (iterations-- != 0) {
                 // Assign observations to centroids
                 //   var records = data.getRecords();
                 limpiaPedidos(clusters);
                 // For each record
-                for(APedido pedido : pedidos){
+                for(Pedido pedido : pedidos){
                     double minDist = Double.MAX_VALUE;
                     // Find the centroid at a minimum distance from it and add the record to its cluster
                     int asigned = -1;
@@ -200,16 +200,18 @@ public class Kmeans {
                     for(int i = 0; i < K; i++){
                         double dist = distancia(clusters, pedido, i);
                         if(dist < minDist){
-                            if(pedido.cantidad + clusters.get(i).capacidad <= clusters.get(i).vehiculo.getCapacidad()){
+                            if(pedido.getCantidad() + clusters.get(i).getCapacidad() <= clusters.get(i).getVehiculo().getCapacidad()){
                                 minDist = dist;
                                 if(asigned>-1){
-                                    if(first) clusters.get(asigned).firstPedido = null;
-                                    else clusters.get(asigned).pedidos.remove(pedido);
-                                    clusters.get(asigned).capacidad -= pedido.cantidad;
+                                    if(first) clusters.get(asigned).setPrimerPedido(null);
+                                    else clusters.get(asigned).getPedidos().remove(pedido);
+                                    clusters.get(asigned).setCapacidad(pedido.getCantidad());
                                 }
-                                if(clusters.get(i).firstPedido == null){
-                                    clusters.get(i).firstPedido = pedido;
-                                    clusters.get(i).capacidad += pedido.cantidad;
+                                if(clusters.get(i).getPrimerPedido() == null){
+                                    clusters.get(i).setPrimerPedido(pedido);
+                                    int cap=clusters.get(i).getCapacidad();
+                                    cap+= pedido.getCantidad();
+                                    clusters.get(i).setCapacidad(cap);
                                     asigned = i;
                                     first = true;
                                 }
@@ -225,20 +227,19 @@ public class Kmeans {
                 }
 //                log.info( "Cluster: " + clusters.get(0).firstPedido);
                 // Exit condition, SSE changed less than PRECISION parameter
-                Double newSSE = calculateTotalSSE(clusters);
+                double newSSE = calculateTotalSSE(clusters);
 
                 if(newSSE < SSE) {
                     SSE = newSSE;
                     for(int i=0; i<clusters.size(); i++){
 
-                        clusterAns.get(i).centroideX = clusters.get(i).centroideX;
-                        clusterAns.get(i).centroideY = clusters.get(i).centroideY;
-                        clusterAns.get(i).centroideZ = clusters.get(i).centroideZ;
+                        clusterAns.get(i).setC1(clusters.get(i).getC1());
+                        clusterAns.get(i).setC2(clusters.get(i).getC2());
+                        clusterAns.get(i).setC3(clusters.get(i).getC3());
                     }
                     System.out.println("newSSE: "+  newSSE);
                 }
 
-                // Recompute centroids according to new cluster assignments
                 recalculaCentroides(clusters);
             }
         }
@@ -246,25 +247,30 @@ public class Kmeans {
         return clusterAns;
     }
 
-    public Double getOptimo(List<APedido> pedidos, List<Cluster> clusters, int K){
-        for(APedido pedido : pedidos){
-            Double minDist = Double.MAX_VALUE;
+    public Double getOptimo(List<Pedido> pedidos, List<Cluster> clusters, int K){
+        for(Pedido pedido : pedidos){
+            double minDist = Double.MAX_VALUE;
             // Find the centroid at a minimum distance from it and add the record to its cluster
             int asigned = -1;
             boolean first = false;
             for(int i = 0; i < K; i++){
-                Double dist = distancia(clusters, pedido, i);
+                double dist = distancia(clusters, pedido, i);
+                int cap;
                 if(dist < minDist){
-                    if(pedido.cantidad + clusters.get(i).capacidad <= clusters.get(i).vehiculo.getCapacidad()){
+                    if(pedido.getCantidad() + clusters.get(i).getCapacidad() <= clusters.get(i).getVehiculo().getCapacidad()){
                         minDist = dist;
                         if(asigned>-1){
-                            if(first) clusters.get(asigned).firstPedido = null;
-                            else clusters.get(asigned).pedidos.remove(pedido);
-                            clusters.get(asigned).capacidad -= pedido.cantidad;
+                            if(first) clusters.get(asigned).setPrimerPedido(null);
+                            else clusters.get(asigned).getPedidos().remove(pedido);
+                            cap = clusters.get(asigned).getCapacidad();
+                            cap-=pedido.getCantidad();
+                            clusters.get(asigned).setCapacidad(cap);
                         }
-                        if(clusters.get(i).firstPedido == null){
-                            clusters.get(i).firstPedido = pedido;
-                            clusters.get(i).capacidad += pedido.cantidad;
+                        if(clusters.get(i).getPrimerPedido() == null){
+                            clusters.get(i).setPrimerPedido(pedido);
+                            int capa=clusters.get(i).getCapacidad();
+                            capa+=pedido.getCantidad();
+                            clusters.get(i).setCapacidad(capa);
                             asigned = i;
                             first = true;
                         }
