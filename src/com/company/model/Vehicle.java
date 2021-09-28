@@ -18,6 +18,11 @@ public class Vehicle {
         this.peso = peso;
         this.velocidad = velocidad;
     }
+
+    public Vehicle() {
+
+    }
+
     public int getCapacidad() {
         return capacidad;
     }

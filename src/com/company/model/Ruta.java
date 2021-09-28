@@ -8,8 +8,44 @@ public class Ruta {
     private final List<Pedido> pedidos;
     private List<Integer> puntosX;
     private List<Integer> puntosY;
+    private List<Integer> camino;
+    private List<Integer> retorno;
     private int distancia;
+    private int tiempo;
+    private int capacidad;
+    private Vehicle vehiculo;
 
+
+    public Ruta(){
+        this.camino = new ArrayList< Integer >();
+        this.retorno = new ArrayList< Integer >();
+        this.pedidos = new ArrayList<Pedido>();
+        this.tiempo = Integer.MAX_VALUE;
+        this.capacidad = 0;
+        this.vehiculo = new Vehicle();
+    }
+
+    public Ruta(Vehicle vehiculo, int capacidad){
+        this.camino = new ArrayList< Integer >();
+        this.retorno = new ArrayList< Integer >();
+        this.pedidos = new ArrayList< Pedido>();
+        this.tiempo = Integer.MAX_VALUE;
+        this.capacidad = capacidad;
+        this.vehiculo = vehiculo;
+    }
+
+    public void agregarPedido(Pedido pedido){
+        if(pedido.getTiempoLimite() < tiempo) tiempo = pedido.getTiempoLimite();
+        pedidos.add(pedido);
+    }
+
+    public void agregarNodo(int idNodo){
+        camino.add(idNodo);
+    }
+
+    public void agregarNodoR(int idNodo){
+        retorno.add(idNodo);
+    }
 
     public Ruta(List<Pedido> pedidos) {
         this.pedidos = new ArrayList<>(pedidos);

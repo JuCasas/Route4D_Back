@@ -1,6 +1,7 @@
 package com.company.algoritmo.dijkstra;
 
 import com.company.model.Bloqueos;
+import com.company.model.Ruta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,8 +95,8 @@ public class Dijkstra {
         }
         if( previo[ destino ] != -1 ){
 
-            if(tipo == 1) ruta.addNodo(destino);
-            else ruta.addNodoRetorno(destino);
+            if(tipo == 1) ruta.agregarNodo(destino);
+            else ruta.agregarNodoR(destino);
         }
         //   System.out.printf("%d " , destino );        //terminada la recursion imprimo los vertices recorridos
     }
