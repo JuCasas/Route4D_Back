@@ -222,31 +222,31 @@ public class Solucion {
 
                 dijkstra.printShortestPath(pedido.getNodoId(), ruta, 1);
 
-                int tamanoFin = ruta.recorrido.size();
+                int tamanoFin = ruta.getCamino().size();
 
                 if(tamanoFin - tamanoIni >= 2) {
-                    ultimoViable = ruta.recorrido.get(ruta.recorrido.size() - 2);
+                    ultimoViable = ruta.getCamino().get(ruta.getCamino().size() - 2);
                 }
 
-                int tiempoEnLlegar = (tamanoFin - tamanoIni-1) * 60 / ((int) Math.round(cluster.vehiculo.getVelocidad()));
+                int tiempoEnLlegar = (tamanoFin - tamanoIni-1) * 60 / ((int) Math.round(cluster.getVehiculo().getVelocidad()));
                 System.out.println("Nodos recorridos: " + (tamanoFin - tamanoIni - 1) + "   Tiempo llegada en minutos: " + tiempoEnLlegar + " minutos");
 
                 tiempoMinutos += tiempoEnLlegar;
 
                 origen = pedido.getNodoId();
 
-                if(cluster.pedidos.size() != 0) System.out.println();
+                if(cluster.getPedidos().size() != 0) System.out.println();
             }
 
             //iteramos mientras sacamos pedidos de la cola de prioridad del cluster
             //ordenados por distancia manhattan al almacén
-            while(!cluster.pedidos.isEmpty()){
+            while(!cluster.getPedidos().isEmpty()){
 
                 //extraemos un pedido del cluster
-                APedido pedido = cluster.pedidos.poll();
-                ruta.addPedido(pedido);
+                Pedido pedido = cluster.getPedidos().poll();
+                ruta.agregarPedido(pedido);
                 //imprimir información del pedido
-                System.out.println("x:  " + pedido.x + "   y: " + pedido.y + "   z: " + pedido.minFaltantes + "   cant: " + pedido.cantidad + "   idNodo: " + pedido.getNodoId());
+                System.out.println("x:  " + pedido.getCordX() + "   y: " + pedido.getCordY() + "   z: " + pedido.getTiempoLimite() + "   cant: " + pedido.getCantidad() + "   idNodo: " + pedido.getNodoId());
 
                 //verificamos si nos encontramos en un nodo bloqueado
                 //esto puede ocurrir ya que hemos entregado un pedido en un nodo bloqueado
@@ -256,29 +256,29 @@ public class Solucion {
                 if(estaBloqueada){
                     System.out.println("Bloqueado!");
                     origen = ultimoViable;
-                    ruta.addNodo(origen);
+                    ruta.agregarNodo(origen);
                 }
 
                 //corremos el algoritmo de dijkstra
-                dijkstraAlgorithm.dijkstra( origen, tiempoMinutos, (int) Math.round(cluster.vehiculo.getVelocidad()) );
+                dijkstra.dijkstra( origen, tiempoMinutos, (int) Math.round(cluster.getVehiculo().getVelocidad()) );
                 System.out.printf("Ruta: ");
 
                 //tamano antes de la nueva parte de la ruta
-                int tamanoIni = ruta.recorrido.size();
+                int tamanoIni = ruta.getCamino().get();.size();
 
                 //obtenemos la ruta en un array
-                dijkstraAlgorithm.printShortestPath(pedido.getNodoId(), ruta, 1);
+                dijkstra.printShortestPath(pedido.getNodoId(), ruta, 1);
 
                 //tamano luego de la nueva parte de la ruta
                 int tamanoFin = ruta.recorrido.size();
 
                 // para obtener el último nodo que no está bloqueado si es que acabamos de entregar un pedido en un nodo bloqueado
                 if(tamanoFin - tamanoIni >= 2) {
-                    ultimoViable = ruta.recorrido.get(ruta.recorrido.size() - 2);
+                    ultimoViable = ruta.getCamino().get(ruta.getCamino().size() - 2);
                 }
 
                 //calculamos el tiempo que tomó en llegar
-                int tiempoEnLlegar = (tamanoFin - tamanoIni-1) * 60 / ((int) Math.round(cluster.vehiculo.getVelocidad()));
+                int tiempoEnLlegar = (tamanoFin - tamanoIni-1) * 60 / ((int) Math.round(cluster.getVehiculo().getVelocidad()));
                 System.out.println("Nodos recorridos: " + (tamanoFin - tamanoIni - 1) + "   Tiempo llegada en minutos: " + tiempoEnLlegar + " minutos");
 
 
@@ -289,7 +289,7 @@ public class Solucion {
                 origen = pedido.getNodoId();
 
                 //detalle estético, la última línea no imprime una nueva en el reporte
-                if(cluster.pedidos.size() != 0) System.out.println();
+                if(cluster.getPedidos().size() != 0) System.out.println();
             }
 
             //tiempo que tomó realizar la entrega
@@ -302,23 +302,23 @@ public class Solucion {
             System.out.println("Tiempo de entrega: " + diferenciaTiempo + " minutos");
             System.out.println("------------------------------------------------------");
 
-            if(cluster.firstPedido != null){
+            if(cluster.getPrimerPedido() != null){
                 System.out.println("Camino de retorno al almacén:  ");
 
-                origen = ruta.recorrido.get(ruta.recorrido.size() - 1);
+                origen = ruta.getCamino().get(ruta.getCamino().size() - 1);
                 boolean estaBloqueada = estaBloqueada(tiempoMinutos, origen);
 
                 if(estaBloqueada){
                     System.out.println("Bloqueado!");
                     origen = ultimoViable;
-                    ruta.addNodoRetorno(origen);
+                    ruta.agregarNodoR(origen);
                 }
 
-                dijkstraAlgorithm.dijkstra( origen, tiempoMinutos, (int) Math.round(cluster.vehiculo.getVelocidad()) );
+                dijkstra.dijkstra( origen, tiempoMinutos, (int) Math.round(cluster.getVehiculo().getVelocidad()) );
 
-                int tamanoIni = ruta.retorno.size();
+                int tamanoIni = ruta.getCamino().size();
 
-                dijkstraAlgorithm.printShortestPath(Configuraciones.almacen, ruta, 2);
+                dijkstra.printShortestPath(Inicializacion.almacen, ruta, 2);
             }
 
             System.out.println();
@@ -330,11 +330,12 @@ public class Solucion {
 
     public void asignarRutas(){
         int contadorAutos = 0;
-        log.info("Asignar rutas: ");
-        log.info("Size Chof Auto: " + listaChoferesAuto.size());
-        log.info("Size Chof Moto: " + listaChoferesMoto.size());
-        log.info("cantAutos: " + cantAutos);
-        log.info("cantMotos: " + cantMotos);
+        System.out.println("Asignar rutas: ");
+        System.out.println("cantV1: " + cantVehiculos1);
+        System.out.println("cantV2: " + cantVehiculos2);
+        System.out.println("cantV3: " + cantVehiculos3);
+        System.out.println("cantV4: " + cantVehiculos4);
+
         for(Usuario chofer: listaChoferesAuto){
             if(contadorAutos == cantAutos) break;
             int minimo = Integer.MAX_VALUE;
