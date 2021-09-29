@@ -1,23 +1,22 @@
 package com.company.model;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 
 public class Bloqueos {
-    private final int id;
-    private final int inicio;
-    private final int fin;
-    private final HashSet<Integer> nodos;
+    private  int id;
+    private int inicio;
+    private  int fin;
+    private  HashSet<Integer> nodos;
 
-    public Bloqueos(int id, int inicio, int fin) {
+    public Bloqueos(Integer id, int minutosInicio, int minutosFin) {
         this.id = id;
-        this.inicio = inicio;
-        this.fin = fin;
+        this.inicio = minutosInicio;
+        this.fin = minutosFin;
         this.nodos = new HashSet<Integer>();
     }
 
-    public void agregar(int id) {
-        nodos.add(id);
-    }
 
     public int getInicio() {
         return inicio;
@@ -26,8 +25,32 @@ public class Bloqueos {
     public int getFin() {
         return fin;
     }
+    public void agregarNodo(int nodoId) {
+        nodos.add(nodoId);
+    }
 
     public boolean estaNodo(int nodoId){
         return nodos.contains(nodoId);
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setInicio(int inicio) {
+        this.inicio = inicio;
+    }
+
+    public void setFin(int fin) {
+        this.fin = fin;
+    }
+
+    public void setNodos(HashSet<Integer> nodos) {
+        this.nodos = nodos;
+    }
+
+    public HashSet<Integer> getNodos() {
+        return nodos;
+    }
+
 }
