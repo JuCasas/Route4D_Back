@@ -75,6 +75,14 @@ public class Ruta {
         return camino;
     }
 
+    public Vehicle getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehicle v) {
+        vehiculo = v;
+    }
+
     public Ruta duplicar(){
         return new Ruta(new ArrayList<>(pedidos));
     }

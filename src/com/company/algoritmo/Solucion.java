@@ -182,7 +182,7 @@ public class Solucion {
         //inicializamos la lista de rutas
         listaRutas = new ArrayList< Ruta >();
 
-        for(Cluster cluster:listaClusters){
+        for(Cluster cluster:listaClusters) {
             //asignamos el tiempo en minutos en que iniciamos a correr el algoritmo
             int tiempoMinutos = tiempoMinutosInicio;
             if(cluster.getPrimerPedido() == null) continue;
@@ -329,7 +329,7 @@ public class Solucion {
         System.out.println("Máximo tiempo de entrega: " + maximoTiempo + " minutos");
     }
 
-    public void asignarRutas(){
+    public void asignarRutas() {
         int contadorAutos = 0;
         System.out.println("Asignar rutas: ");
         System.out.println("cantV1: " + cantVehiculos1);
@@ -338,12 +338,12 @@ public class Solucion {
         System.out.println("cantV4: " + cantVehiculos4);
 
         for(Usuario chofer: listaChoferesAuto){
-            if(contadorAutos == cantAutos) break;
+            if(contadorAutos == cantidadTotal) break;
             int minimo = Integer.MAX_VALUE;
             int contador = 0;
             int minCont = -1;
             for(Ruta ruta: listaRutas){
-                if(ruta.vehiculo.getTipo_id() == 1 && ruta.chofer == null && minimo > ruta.tiempoMin){
+                if(ruta.getVehiculo().getTipo() == 1 && ruta.chofer == null && minimo > ruta.tiempoMin){
                     minimo = ruta.tiempoMin;
                     minCont = contador;
                 }
@@ -351,9 +351,9 @@ public class Solucion {
             }
             if(minCont == -1) break;
             listaRutas.get(minCont).chofer = chofer;
-            listaRutas.get(minCont).vehiculo = listaAutos.get(contadorAutos);
-            log.info("MinCont: " + minCont);
-            log.info("Auto: " + listaRutas.get(minCont).chofer);
+            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorAutos));
+            System.out.println("MinCont: " + minCont);
+            System.out.println("Auto: " + listaRutas.get(minCont).chofer);
             contadorAutos++;
         }
 
@@ -372,41 +372,23 @@ public class Solucion {
             }
             if(minCont == -1) break;
             listaRutas.get(minCont).chofer = chofer;
-            listaRutas.get(minCont).vehiculo = listaMotos.get(contadorMotos);
-            log.info("MinCont: " + minCont);
-            log.info("Auto: " + listaRutas.get(minCont).chofer);
+            listaRutas.get(minCont).setVehiculo(listaMotos.get(contadorMotos));
+            System.out.println("MinCont: " + minCont);
+            System.out.println("Auto: " + listaRutas.get(minCont).chofer);
             contadorMotos++;
         }
 
         for(int i=listaRutas.size()-1; i>=0; i--){
             if(listaRutas.get(i).chofer == null) listaRutas.remove(i);
             else {
-                Ruta ruta = listaRutas.get(i);
-                AlgoRuta algoRuta = new AlgoRuta();
-                algoRuta.setInicio(LocalDateTime.now());
-                algoRuta.setDistancia(0.0);
-                algoRuta.setCosto(0.0);
-                algoRuta.setUsuario_id(ruta.chofer.getId());
-                algoRuta.setVehiculo_id(ruta.vehiculo.getId());
-                algoRuta.setEstado_id(2);
-                algoritmoRepository.save(algoRuta);
-                usuarioRepository.cambiarEstadoUsuario(algoRuta.getUsuario_id());
-                algoritmoRepository.cambiarEstadoVehiculo(algoRuta.getVehiculo_id());
-                int orden = 1;
-                for(APedido pedido: ruta.pedidos){
-                    algoritmoRepository.cambiarEstadoPedido(pedido.id);
-                    algoritmoRepository.insertarPedidoRuta(algoRuta.getId(), pedido.id, orden);
-                    orden++;
-                }
-                orden = 1;
-                for(int nodo: ruta.recorrido){
-                    algoritmoRepository.insertarNodoRuta(algoRuta.getId(),nodo,orden);
-                    orden++;
-                }
-                for(int nodo: ruta.retorno){
-                    algoritmoRepository.insertarNodoRuta(algoRuta.getId(),nodo,orden);
-                    orden++;
-                }
+                // Ruta ruta = listaRutas.get(i);
+                // AlgoRuta algoRuta = new AlgoRuta();
+                // algoRuta.setInicio(LocalDateTime.now());
+                // algoRuta.setDistancia(0.0);
+                // algoRuta.setCosto(0.0);
+                // algoRuta.setUsuario_id(ruta.chofer.getId());
+                // algoRuta.setVehiculo_id(ruta.vehiculo.getId());
+                // algoRuta.setEstado_id(2);
             }
             System.out.println(i);
         }
