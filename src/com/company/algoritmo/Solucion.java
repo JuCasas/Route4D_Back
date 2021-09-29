@@ -264,13 +264,13 @@ public class Solucion {
                 System.out.printf("Ruta: ");
 
                 //tamano antes de la nueva parte de la ruta
-                int tamanoIni = ruta.getCamino().get();.size();
+                int tamanoIni = ruta.getCamino().size();
 
                 //obtenemos la ruta en un array
                 dijkstra.printShortestPath(pedido.getNodoId(), ruta, 1);
 
                 //tamano luego de la nueva parte de la ruta
-                int tamanoFin = ruta.recorrido.size();
+                int tamanoFin = ruta.getCamino().size();
 
                 // para obtener el último nodo que no está bloqueado si es que acabamos de entregar un pedido en un nodo bloqueado
                 if(tamanoFin - tamanoIni >= 2) {
