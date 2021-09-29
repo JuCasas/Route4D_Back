@@ -88,8 +88,6 @@ public class Reader {
                     Bloqueos cb = new Bloqueos(intervalo.getId(), convertLocalDateToMinutes(intervalo.getInicio()), convertLocalDateToMinutes(intervalo.getFin()));
                     listaBloqueos.add(cb);
 
-
-
                 }
             }
             myReader.close();
@@ -129,9 +127,7 @@ public class Reader {
         return intervalo;
     }
     private static String obtenerFechaNombre(String nombre){
-        //b l o q u e o s
-        String strDate = nombre.substring(7, 4) + "-" + nombre.substring(11, 6);
-        return strDate;
+        return nombre.substring(8, 11) + "-" + nombre.substring(11, 13);
     }
 
     //lectura de vehiculos
