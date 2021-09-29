@@ -33,6 +33,7 @@ public class Solucion {
     public String inicializar(){
         listaVehiculos = Reader.leerVehiculos(); //falta implementar
         listaPedidos = Reader.obtenerListaPedidos(); //falta implementar
+        // obtener lista mantenimientos
         if(listaVehiculos.size() == 0) return "No hay vehículos disponibles para las rutas";
         if(listaPedidos.size() == 0) return "No hay pedidos en cola";
         obtenerCantidadClusters();

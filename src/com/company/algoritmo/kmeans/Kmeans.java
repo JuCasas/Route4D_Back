@@ -24,8 +24,8 @@ public class Kmeans {
     //selects initial cluster centers for k-mean clustering in a smart way to speed up convergence
     private List<Cluster>kmpp(List<Cluster> clusters){
         for(Cluster cluster: clusters){
-            cluster.setC1((int) (Math.random()*51));
-            cluster.setC2((int) (Math.random()*71));
+            cluster.setC1((int) (Math.random()*71));
+            cluster.setC2((int) (Math.random()*51));
             cluster.setC3((int) (Math.random()*1440));
         }
         return clusters;
@@ -153,8 +153,8 @@ public class Kmeans {
         int promX, promY, promZ, cant;
         for(Cluster cluster : clusters){
             if(cluster.getPrimerPedido() == null){
-                cluster.setC1((int) (Math.random()*51));
-                cluster.setC2((int) (Math.random()*71));
+                cluster.setC1((int) (Math.random()*71));
+                cluster.setC2((int) (Math.random()*51));
                 cluster.setC3((int) (Math.random()*1440));
                 continue;
             }
@@ -223,10 +223,7 @@ public class Kmeans {
                             }
                         }
                     }
-//                    log.info( first ? "true" : "false");
                 }
-//                log.info( "Cluster: " + clusters.get(0).firstPedido);
-                // Exit condition, SSE changed less than PRECISION parameter
                 double newSSE = calculateTotalSSE(clusters);
 
                 if(newSSE < SSE) {
