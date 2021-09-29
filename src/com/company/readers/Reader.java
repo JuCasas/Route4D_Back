@@ -20,33 +20,65 @@ public class Reader {
     }
 
     public static List<Pedido> obtenerListaPedidos() {
+        try{
+            File archivo = new File("src/resources/bloqueos202109.txt");
+            Scanner myReader = new Scanner(archivo);
+            List<Pedido> pedidosList = new ArrayList<>();
+            String strDate = obtenerFechaNombrePedido(archivo.getName());
+            while (myReader.hasNextLine()) {
+                String line = myReader.nextLine();
+                Pedido pedido = getPedidoFromLine(line, strDate);
+                pedidosList.add(pedido);
+            }
+            myReader.close();
+
+        }catch (FileNotFoundException e) {
+            System.out.println("Ocurrio un error");
+            e.printStackTrace();
+        }
         return null;
     }
- /*
-    public static List<Bloqueos> obtenerBloqueadas(){
-        List<CBloqueo>lista = obtenerCallesBloqueadas();
-        List<Bloqueos> cbLista = new ArrayList<>();
-        for(CBloqueo bloqueado: lista){
-            Bloqueos cb = new Bloqueos(bloqueado.getId(), convertLocalDateToMinutes(bloqueado.getInicio()), convertLocalDateToMinutes(bloqueado.getFin()));
-            String line = bloqueado.getNodos();
-            while(line.length() != 0){
-                int indexChar = line.indexOf(',');
-                int idNodo;
-                if (indexChar == -1){
-                    idNodo = Integer.parseInt( line );
-                    line = "";
-                }
-                else{
-                    idNodo = Integer.parseInt( line.substring( 0, indexChar ) );
-                    line = line.substring( indexChar + 1 );
-                }
-                cb.agregarNodo(idNodo);
-            }
-            cbLista.add(cb);
-        }
-        return cbLista;
+
+    private static Pedido getPedidoFromLine(String line, String strDate) {
+        Pedido pedido = new Pedido();
+
+        int dia = getIntFromLine(line,":");
+        line = line.substring( line.indexOf(':') + 1 );
+        int hh = getIntFromLine(line,":");
+        line = line.substring( line.indexOf(':') + 1 );
+        int mm = getIntFromLine(line, ",");
+        line = line.substring( line.indexOf(',') + 1 );
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m:s");
+        LocalDateTime fechaPedido = LocalDateTime.parse(strDate + " " +dia+" "+ hh + ":" + mm + ":0", formatter);
+        pedido.setFechaPedido(fechaPedido);
+
+        //set nodo
+        int x = getIntFromLine(line, ",");
+        line = line.substring( line.indexOf(',') + 1 );
+        int y = getIntFromLine(line, ",");
+        line = line.substring( line.indexOf(',') + 1 );
+        pedido.setIdDestino(x+71*y+ 1);
+
+        //set cant Pedido m3
+        int cant = getIntFromLine(line, ",");
+        line = line.substring( line.indexOf(',') + 1 );
+        pedido.setCantidad(cant);
+
+        //set plazo maximo de entrega
+        int hLimite = Integer.parseInt(line);
+        pedido.setPlazoEntrega(fechaPedido.plusHours(hLimite));
+        pedido.setFechaEntrega(null);
+        pedido.setFechaPedido(LocalDateTime.now());
+        return pedido;
     }
-*/
+
+    private static String obtenerFechaNombrePedido(String name) {
+
+        String strDate = name.substring(6, 10) + "-" + name.substring(9, 11);
+        return strDate;
+    }
+
+
     private static Integer convertLocalDateToMinutes(LocalDateTime ldt){
         LocalDateTime d1 = LocalDateTime.of(2021, Month.JANUARY, 1, 0, 0);
         return (int) ChronoUnit.MINUTES.between(d1, ldt);
