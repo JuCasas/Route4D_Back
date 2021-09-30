@@ -14,9 +14,7 @@ import java.util.Scanner;
 
 public class Reader {
     public static List<Vehicle> leerVehiculos() {
-
-
-    return null;
+        return null;
     }
 
     public static List<Pedido> obtenerListaPedidos() {

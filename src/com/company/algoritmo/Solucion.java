@@ -20,6 +20,7 @@ public class Solucion {
     public List<Ruta> listaRutas;
     public Dijkstra dijkstra;
     public Kmeans kmeans;
+
     public int cantCluster1=0;
     public int cantCluster2=0;
     public int cantCluster3=0;
@@ -31,8 +32,8 @@ public class Solucion {
     public int cantidadTotal=0;
 
     public String inicializar(){
-        listaVehiculos = Reader.leerVehiculos(); //falta implementar
-        listaPedidos = Reader.obtenerListaPedidos(); //falta implementar
+        listaVehiculos = Reader.leerVehiculos();
+        listaPedidos = Reader.obtenerListaPedidos();
         // obtener lista mantenimientos
         if(listaVehiculos.size() == 0) return "No hay vehículos disponibles para las rutas";
         if(listaPedidos.size() == 0) return "No hay pedidos en cola";
@@ -74,6 +75,7 @@ public class Solucion {
             dijkstra.addEdge(origen, destino);
         }
     }
+    
     public List<Vehicle> inicializarVehiculos() {
         List<Vehicle> lista = new ArrayList<>();
         for(int i = 0; i < cantCluster1;i++){
