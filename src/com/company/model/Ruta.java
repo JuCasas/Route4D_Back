@@ -15,35 +15,35 @@ public class Ruta {
     private int capacidad;
     private Vehicle vehiculo;
 
-
-    public Ruta(){
-        this.camino = new ArrayList< Integer >();
-        this.retorno = new ArrayList< Integer >();
+    public Ruta() {
+        this.camino = new ArrayList<Integer>();
+        this.retorno = new ArrayList<Integer>();
         this.pedidos = new ArrayList<Pedido>();
         this.tiempo = Integer.MAX_VALUE;
         this.capacidad = 0;
         this.vehiculo = new Vehicle();
     }
 
-    public Ruta(Vehicle vehiculo, int capacidad){
-        this.camino = new ArrayList< Integer >();
-        this.retorno = new ArrayList< Integer >();
-        this.pedidos = new ArrayList< Pedido>();
+    public Ruta(Vehicle vehiculo, int capacidad) {
+        this.camino = new ArrayList<Integer>();
+        this.retorno = new ArrayList<Integer>();
+        this.pedidos = new ArrayList<Pedido>();
         this.tiempo = Integer.MAX_VALUE;
         this.capacidad = capacidad;
         this.vehiculo = vehiculo;
     }
 
-    public void agregarPedido(Pedido pedido){
-        if(pedido.getTiempoLimite() < tiempo) tiempo = pedido.getTiempoLimite();
+    public void agregarPedido(Pedido pedido) {
+        if (pedido.getTiempoLimite() < tiempo)
+            tiempo = pedido.getTiempoLimite();
         pedidos.add(pedido);
     }
 
-    public void agregarNodo(int idNodo){
+    public void agregarNodo(int idNodo) {
         camino.add(idNodo);
     }
 
-    public void agregarNodoR(int idNodo){
+    public void agregarNodoR(int idNodo) {
         retorno.add(idNodo);
     }
 
@@ -52,24 +52,16 @@ public class Ruta {
         Collections.shuffle(this.pedidos);
     }
     /*
-    public Nodo getNodo(int index){
-        return nodos.get(index);
-    }
-
-    public int getDistanciaRuta(){
-        if(distancia!=0) return distancia;
-        int distanciaTotal =0;
-
-        for(int i =0;i<numClientes();i++) {
-            Nodo inicio = getNodo(i);
-            Nodo fin = getNodo(i + 1 < numClientes() ? i+1 : 0); //SE DEBE ACTUALIZAR POR QUE ES MAS DE UN VEHICULO
-            //POR CLIENTE
-            distanciaTotal += Helper.distancia(inicio, fin);
-        }
-        distancia = distanciaTotal;
-        return distanciaTotal;
-    }
-    */
+     * public Nodo getNodo(int index){ return nodos.get(index); }
+     * 
+     * public int getDistanciaRuta(){ if(distancia!=0) return distancia; int
+     * distanciaTotal =0;
+     * 
+     * for(int i =0;i<numClientes();i++) { Nodo inicio = getNodo(i); Nodo fin =
+     * getNodo(i + 1 < numClientes() ? i+1 : 0); //SE DEBE ACTUALIZAR POR QUE ES MAS
+     * DE UN VEHICULO //POR CLIENTE distanciaTotal += Helper.distancia(inicio, fin);
+     * } distancia = distanciaTotal; return distanciaTotal; }
+     */
 
     public List<Integer> getCamino() {
         return camino;
@@ -83,11 +75,11 @@ public class Ruta {
         vehiculo = v;
     }
 
-    public Ruta duplicar(){
+    public Ruta duplicar() {
         return new Ruta(new ArrayList<>(pedidos));
     }
 
-    public int numClientes(){
+    public int numClientes() {
         return pedidos.size();
     }
 
@@ -97,7 +89,6 @@ public class Ruta {
 
     @Override
     public String toString() {
-        return   pedidos +
-                ", distancia=" + distancia ;
+        return pedidos + ", distancia=" + distancia;
     }
 }

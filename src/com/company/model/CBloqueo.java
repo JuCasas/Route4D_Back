@@ -8,12 +8,13 @@ public class CBloqueo {
     private LocalDateTime fin;
     private String nodos;
 
-    public CBloqueo (int id,LocalDateTime inicio,LocalDateTime fin, String nodos){
-        this.id=id;
-        this.inicio=inicio;
+    public CBloqueo(int id, LocalDateTime inicio, LocalDateTime fin, String nodos) {
+        this.id = id;
+        this.inicio = inicio;
         this.fin = fin;
-        this.nodos=nodos;
+        this.nodos = nodos;
     }
+
     public void setNodos(String nodos) {
         this.nodos = nodos;
     }
@@ -46,4 +47,3 @@ public class CBloqueo {
         return nodos;
     }
 }
-

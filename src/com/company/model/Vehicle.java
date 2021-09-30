@@ -10,9 +10,9 @@ public class Vehicle {
     private int estado;
     public double velocidad;
 
-    public  Vehicle(int id,double capacidad,int tipo,double peso,String placa,int estado,double velocidad){
+    public Vehicle(int id, double capacidad, int tipo, double peso, String placa, int estado, double velocidad) {
         this.id = id;
-        this.capacidad=capacidad;
+        this.capacidad = capacidad;
         this.tipo = tipo;
         this.placa = placa;
         this.estado = estado;
@@ -78,13 +78,7 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "id=" + id +
-                ", capacidad=" + capacidad +
-                ", tipo=" + tipo +
-                ", peso=" + peso +
-                ", placa='" + placa + '\'' +
-                ", estado=" + estado +
-                '}';
+        return "Vehicle{" + "id=" + id + ", capacidad=" + capacidad + ", tipo=" + tipo + ", peso=" + peso + ", placa='"
+                + placa + '\'' + ", estado=" + estado + '}';
     }
 }

@@ -18,7 +18,7 @@ public class Reader {
     }
 
     public static List<Pedido> obtenerListaPedidos() {
-        try{
+        try {
             File archivo = new File("src/resources/bloqueos202109.txt");
             Scanner myReader = new Scanner(archivo);
             List<Pedido> pedidosList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Reader {
             }
             myReader.close();
 
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Ocurrio un error");
             e.printStackTrace();
         }
@@ -40,29 +40,29 @@ public class Reader {
     private static Pedido getPedidoFromLine(String line, String strDate) {
         Pedido pedido = new Pedido();
 
-        int dia = getIntFromLine(line,":");
-        line = line.substring( line.indexOf(':') + 1 );
-        int hh = getIntFromLine(line,":");
-        line = line.substring( line.indexOf(':') + 1 );
+        int dia = getIntFromLine(line, ":");
+        line = line.substring(line.indexOf(':') + 1);
+        int hh = getIntFromLine(line, ":");
+        line = line.substring(line.indexOf(':') + 1);
         int mm = getIntFromLine(line, ",");
-        line = line.substring( line.indexOf(',') + 1 );
+        line = line.substring(line.indexOf(',') + 1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m:s");
-        LocalDateTime fechaPedido = LocalDateTime.parse(strDate + " " +dia+" "+ hh + ":" + mm + ":0", formatter);
+        LocalDateTime fechaPedido = LocalDateTime.parse(strDate + " " + dia + " " + hh + ":" + mm + ":0", formatter);
         pedido.setFechaPedido(fechaPedido);
 
-        //set nodo
+        // set nodo
         int x = getIntFromLine(line, ",");
-        line = line.substring( line.indexOf(',') + 1 );
+        line = line.substring(line.indexOf(',') + 1);
         int y = getIntFromLine(line, ",");
-        line = line.substring( line.indexOf(',') + 1 );
-        pedido.setIdDestino(x+71*y+ 1);
+        line = line.substring(line.indexOf(',') + 1);
+        pedido.setIdDestino(x + 71 * y + 1);
 
-        //set cant Pedido m3
+        // set cant Pedido m3
         int cant = getIntFromLine(line, ",");
-        line = line.substring( line.indexOf(',') + 1 );
+        line = line.substring(line.indexOf(',') + 1);
         pedido.setCantidad(cant);
 
-        //set plazo maximo de entrega
+        // set plazo maximo de entrega
         int hLimite = Integer.parseInt(line);
         pedido.setPlazoEntrega(fechaPedido.plusHours(hLimite));
         pedido.setFechaEntrega(null);
@@ -76,8 +76,7 @@ public class Reader {
         return strDate;
     }
 
-
-    private static Integer convertLocalDateToMinutes(LocalDateTime ldt){
+    private static Integer convertLocalDateToMinutes(LocalDateTime ldt) {
         LocalDateTime d1 = LocalDateTime.of(2021, Month.JANUARY, 1, 0, 0);
         return (int) ChronoUnit.MINUTES.between(d1, ldt);
     }
@@ -94,28 +93,28 @@ public class Reader {
                 String data = myReader.nextLine();
                 IntervaloB intervalo = obtenerIntervalo(data, strDate);
                 listaIntervalos.add(intervalo);
-                data = data.substring( data.indexOf(',') + 1 );
+                data = data.substring(data.indexOf(',') + 1);
                 List<IntervaloBN> listaIntervalosN = new ArrayList<>();
-                while(data.length() != 0){
+                while (data.length() != 0) {
 
                     IntervaloBN intervaloNodo = new IntervaloBN();
                     int indexChar = data.indexOf(',');
-                    int x,y;
-                    x = Integer.parseInt( data.substring( 0, indexChar ) );
-                    data = data.substring( indexChar + 1 );
+                    int x, y;
+                    x = Integer.parseInt(data.substring(0, indexChar));
+                    data = data.substring(indexChar + 1);
                     indexChar = data.indexOf(',');
-                    if (indexChar == -1){
-                        y = Integer.parseInt( data );
+                    if (indexChar == -1) {
+                        y = Integer.parseInt(data);
                         data = "";
+                    } else {
+                        y = Integer.parseInt(data.substring(0, indexChar));
+                        data = data.substring(indexChar + 1);
                     }
-                    else{
-                        y = Integer.parseInt( data.substring( 0, indexChar ) );
-                        data = data.substring( indexChar + 1 );
-                    }
-                    intervaloNodo.setNodo_id(x+71*y+1);
+                    intervaloNodo.setNodo_id(x + 71 * y + 1);
                     intervaloNodo.setIntervalo_id(intervalo.getId());
-                    listaIntervalosN.add( intervaloNodo );
-                    Bloqueos cb = new Bloqueos(intervalo.getId(), convertLocalDateToMinutes(intervalo.getInicio()), convertLocalDateToMinutes(intervalo.getFin()));
+                    listaIntervalosN.add(intervaloNodo);
+                    Bloqueos cb = new Bloqueos(intervalo.getId(), convertLocalDateToMinutes(intervalo.getInicio()),
+                            convertLocalDateToMinutes(intervalo.getFin()));
                     listaBloqueos.add(cb);
 
                 }
@@ -128,40 +127,41 @@ public class Reader {
         return listaBloqueos;
     }
 
-    private static Integer getIntFromLine(String line, String c){
+    private static Integer getIntFromLine(String line, String c) {
         int indexChar = line.indexOf(c);
-        return Integer.parseInt( line.substring( 0, indexChar ) );
+        return Integer.parseInt(line.substring(0, indexChar));
     }
 
-    private static IntervaloB obtenerIntervalo(String line, String strDate){
+    private static IntervaloB obtenerIntervalo(String line, String strDate) {
         IntervaloB intervalo = new IntervaloB();
 
-        int dia = getIntFromLine(line,":");
-        line = line.substring( line.indexOf(':') + 1 );
-        int hh = getIntFromLine(line,":");
-        line = line.substring( line.indexOf(':') + 1 );
-        int mm = getIntFromLine(line,"-");
-        line = line.substring( line.indexOf('-') + 1 );
+        int dia = getIntFromLine(line, ":");
+        line = line.substring(line.indexOf(':') + 1);
+        int hh = getIntFromLine(line, ":");
+        line = line.substring(line.indexOf(':') + 1);
+        int mm = getIntFromLine(line, "-");
+        line = line.substring(line.indexOf('-') + 1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d H:m:s");
         LocalDateTime inicio = LocalDateTime.parse(strDate + "-" + dia + " " + hh + ":" + mm + ":0", formatter);
         intervalo.setInicio(inicio);
 
-        dia = getIntFromLine(line,":");
-        line = line.substring( line.indexOf(':') + 1 );
-        hh = getIntFromLine(line,":");
-        line = line.substring( line.indexOf(':') + 1 );
-        mm = getIntFromLine(line,",");
+        dia = getIntFromLine(line, ":");
+        line = line.substring(line.indexOf(':') + 1);
+        hh = getIntFromLine(line, ":");
+        line = line.substring(line.indexOf(':') + 1);
+        mm = getIntFromLine(line, ",");
         LocalDateTime fin = LocalDateTime.parse(strDate + "-" + dia + " " + hh + ":" + mm + ":0", formatter);
         intervalo.setFin(fin);
 
         return intervalo;
     }
-    private static String obtenerFechaNombre(String nombre){
+
+    private static String obtenerFechaNombre(String nombre) {
         return nombre.substring(8, 11) + "-" + nombre.substring(11, 13);
     }
 
-    //lectura de vehiculos
-    public List<Vehicle> leerVehiculos(List<Vehicle> lista){
-       return lista;
+    // lectura de vehiculos
+    public List<Vehicle> leerVehiculos(List<Vehicle> lista) {
+        return lista;
     }
 }
