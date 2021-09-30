@@ -375,8 +375,8 @@ public class Solucion {
             int contador = 0;
             int minCont = -1;
             for (Ruta ruta : listaRutas) {
-                if (ruta.getVehiculo().getTipo() == 1 && ruta.chofer == null && minimo > ruta.tiempoMin) {
-                    minimo = ruta.tiempoMin;
+                if (ruta.getVehiculo().getTipo() == 1 && ruta.chofer == null && minimo > ruta.getTiempo()) {
+                    minimo = ruta.getTiempo();
                     minCont = contador;
                 }
                 contador++;
@@ -398,8 +398,8 @@ public class Solucion {
             int contador = 0;
             int minCont = -1;
             for (Ruta ruta : listaRutas) {
-                if (ruta.vehiculo.getTipo_id() == 2 && ruta.chofer == null && minimo > ruta.tiempoMin) {
-                    minimo = ruta.tiempoMin;
+                if (ruta.getVehiculo().getTipo() == 2 && ruta.chofer == null && minimo > ruta.getTiempo()) {
+                    minimo = ruta.getTiempo();
                     minCont = contador;
                 }
                 contador++;
@@ -438,5 +438,4 @@ public class Solucion {
         }
         return false;
     }
-
 }

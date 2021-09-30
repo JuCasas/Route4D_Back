@@ -87,6 +87,10 @@ public class Ruta {
         return pedidos;
     }
 
+    public int getTiempo() {
+        return tiempo;
+    }
+
     @Override
     public String toString() {
         return pedidos + ", distancia=" + distancia;
