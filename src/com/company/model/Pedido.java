@@ -150,6 +150,10 @@ public class Pedido implements Comparable<Pedido> {
         this.idRuta = idRuta;
     }
 
+    public int getNodoId(){
+        return this.cordX + 71 * this.cordY + 1;
+    }
+
     @Override
     public int compareTo(Pedido o) {
         if (this.tiempoLimite == o.tiempoLimite) {
