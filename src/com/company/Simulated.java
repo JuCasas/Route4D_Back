@@ -11,7 +11,7 @@ public class Simulated {
     private static final double factor = 0.995;
 
     public static void main(String[] args) {
-        List<Nodo> clientes = new ArrayList<>();
+        List<Pedido> clientes = new ArrayList<>();
         List<Vehicle> camiones = new ArrayList<>();
 
         // Agregando camiones
@@ -23,10 +23,10 @@ public class Simulated {
         camiones.add(camion3);
 
         // Agregando clientes
-        Nodo cliente1 = new Nodo(100, 100, 10, 4);
-        Nodo cliente2 = new Nodo(150, 200, 6, 3);
-        Nodo cliente3 = new Nodo(100, 200, 4, 2);
-        Nodo cliente4 = new Nodo(200, 100, 15, 1);
+        Pedido cliente1 = new Pedido(1, 100, 100, 10, 4);
+        Pedido cliente2 = new Pedido(2, 150, 200, 6, 3);
+        Pedido cliente3 = new Pedido(3, 100, 200, 4, 2);
+        Pedido cliente4 = new Pedido(4, 200, 100, 15, 1);
         clientes.add(cliente1);
         clientes.add(cliente2);
         clientes.add(cliente3);
@@ -37,9 +37,9 @@ public class Simulated {
         int tiempos[] = new int[num];
         int demandas[] = new int[num];
         for (int i = 0; i < num; i++) {
-            Nodo cliente = clientes.get(i);
-            tiempos[i] = cliente.getLimite();
-            demandas[i] = cliente.getPedido();
+            Pedido cliente = clientes.get(i);
+            tiempos[i] = cliente.getTiempoLimite();
+            demandas[i] = cliente.getCantidad();
         }
 
         // Cargar en un arreglo la demanda de cada cliente
@@ -58,7 +58,7 @@ public class Simulated {
             int index1 = (int) (vecino.numClientes() * Math.random());
             int index2 = (int) (vecino.numClientes() * Math.random());
 
-            Collections.swap(vecino.getNodos(), index1, index2);
+            Collections.swap(vecino.getPedidos(), index1, index2);
 
             int currentLength = current.getDistanciaRuta();
             int neighborLength = vecino.getDistanciaRuta();
