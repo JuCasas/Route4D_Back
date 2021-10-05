@@ -11,16 +11,16 @@ public class Simulated {
     private static final double factor = 0.995;
 
     public static void main(String[] args) {
-       //List<Pedido> clientes = new ArrayList<>();
-        //List<Vehicle> camiones= new ArrayList<>();
+        List<Pedido> clientes = new ArrayList<>();
+        List<Vehicle> camiones= new ArrayList<>();
 
-        //Vehicle camion1 = new Vehicle(1,20,1,20,"asd123",1);
+        Vehicle camion1 = new Vehicle(1,20,1,20,"asd123",1);
 
-        //ehicle camion2 = new Vehicle(1,15,1,20,"asd323",1);
-        //camiones.add(camion1);
-        //camiones.add(camion2);
-       // Vehicle camion3 = new Vehicle(1,20,1,20,"asd123",1);
-/*
+        Vehicle camion2 = new Vehicle(1,15,1,20,"asd323",1);
+        camiones.add(camion1);
+        camiones.add(camion2);
+        Vehicle camion3 = new Vehicle(1,20,1,20,"asd123",1);
+
         Nodo cliente1 = new Nodo(100, 100,10,4);
         clientes.add(cliente1);
 
@@ -44,17 +44,14 @@ public class Simulated {
         }
 
 
-        *
-            Cargar en un arreglo la demanda de cada cliente
-            Verificar que cada cliente pueda rutearse:
 
- Iniciar la ruta k desde el depósito. Definir
-଴௞ ଴
- Definir q(k) = Q
-        *
-        *
-        *
-        *
+//            Cargar en un arreglo la demanda de cada cliente
+//            Verificar que cada cliente pueda rutearse:
+//
+// Iniciar la ruta k desde el depósito. Definir
+//଴௞ ଴
+// Definir q(k) = Q;
+
 
 
         Ruta current = new Ruta(clientes);
@@ -84,7 +81,7 @@ public class Simulated {
         }
 
         System.out.println("Distancia Recorrida: " + best.getDistanciaRuta());
-        System.out.println("Tour: " + best);*/
+        System.out.println("Tour: " + best);
     }
 }
 
