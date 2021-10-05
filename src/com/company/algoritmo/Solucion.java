@@ -389,6 +389,73 @@ public class Solucion {
             System.out.println("Auto: " + listaRutas.get(minCont).getVehiculo());
             contadorAutos++;
         }
+
+        for (Vehicle vehiculo : listaVehiculos) {
+            if (contadorAutos == cantidadTotal)
+                break;
+            int minimo = Integer.MAX_VALUE;
+            int contador = 0;
+            int minCont = -1;
+            for (Ruta ruta : listaRutas) {
+                if (ruta.getVehiculo().getTipo() == 1 && ruta.getVehiculo() == null && minimo > ruta.getTiempo()) {
+                    minimo = ruta.getTiempo();
+                    minCont = contador;
+                }
+                contador++;
+            }
+            if (minCont == -1)
+                break;
+            listaRutas.get(minCont).setVehiculo(vehiculo);
+            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorAutos));
+            System.out.println("MinCont: " + minCont);
+            System.out.println("Auto: " + listaRutas.get(minCont).getVehiculo());
+            contadorAutos++;
+        }
+
+        for (Vehicle vehiculo : listaVehiculos) {
+            if (contadorAutos == cantidadTotal)
+                break;
+            int minimo = Integer.MAX_VALUE;
+            int contador = 0;
+            int minCont = -1;
+            for (Ruta ruta : listaRutas) {
+                if (ruta.getVehiculo().getTipo() == 1 && ruta.getVehiculo() == null && minimo > ruta.getTiempo()) {
+                    minimo = ruta.getTiempo();
+                    minCont = contador;
+                }
+                contador++;
+            }
+            if (minCont == -1)
+                break;
+            listaRutas.get(minCont).setVehiculo(vehiculo);
+            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorAutos));
+            System.out.println("MinCont: " + minCont);
+            System.out.println("Auto: " + listaRutas.get(minCont).getVehiculo());
+            contadorAutos++;
+        }
+
+        for (Vehicle vehiculo : listaVehiculos) {
+            if (contadorAutos == cantidadTotal)
+                break;
+            int minimo = Integer.MAX_VALUE;
+            int contador = 0;
+            int minCont = -1;
+            for (Ruta ruta : listaRutas) {
+                if (ruta.getVehiculo().getTipo() == 1 && ruta.getVehiculo() == null && minimo > ruta.getTiempo()) {
+                    minimo = ruta.getTiempo();
+                    minCont = contador;
+                }
+                contador++;
+            }
+            if (minCont == -1)
+                break;
+            listaRutas.get(minCont).setVehiculo(vehiculo);
+            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorAutos));
+            System.out.println("MinCont: " + minCont);
+            System.out.println("Auto: " + listaRutas.get(minCont).getVehiculo());
+            contadorAutos++;
+        }
+
 //TODO REVISAR ESTO
 
 //        int contadorMotos = 0;
