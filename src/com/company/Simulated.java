@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.model.*;
+import com.company.readers.Reader;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,15 +23,19 @@ public class Simulated {
         camiones.add(camion2);
         camiones.add(camion3);
 
-        // Agregando clientes
-        Pedido cliente1 = new Pedido(1, 100, 100, 10, 4);
-        Pedido cliente2 = new Pedido(2, 150, 200, 6, 3);
-        Pedido cliente3 = new Pedido(3, 100, 200, 4, 2);
-        Pedido cliente4 = new Pedido(4, 200, 100, 15, 1);
-        clientes.add(cliente1);
-        clientes.add(cliente2);
-        clientes.add(cliente3);
-        clientes.add(cliente4);
+        clientes = Reader.obtenerListaPedidos();
+
+
+
+        //        // Agregando clientes
+//        Pedido cliente1 = new Pedido(1, 100, 100, 10, 4);
+//        Pedido cliente2 = new Pedido(2, 150, 200, 6, 3);
+//        Pedido cliente3 = new Pedido(3, 100, 200, 4, 2);
+//        Pedido cliente4 = new Pedido(4, 200, 100, 15, 1);
+//        clientes.add(cliente1);
+//        clientes.add(cliente2);
+//        clientes.add(cliente3);
+//        clientes.add(cliente4);
 
         int num = clientes.size();
         int matrizDistancias[][] = Helper.calcMatriz(clientes);

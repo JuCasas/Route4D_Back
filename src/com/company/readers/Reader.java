@@ -19,7 +19,7 @@ public class Reader {
 
     public static List<Pedido> obtenerListaPedidos() {
         try {
-            File archivo = new File("src/resources/ventas202109.txt");
+            File archivo = new File("src/com/company/resources/ventas202109.txt");
             Scanner myReader = new Scanner(archivo);
             List<Pedido> pedidosList = new ArrayList<>();
             String strDate = obtenerFechaNombrePedido(archivo.getName());
