@@ -361,7 +361,7 @@ public class Solucion {
     }
 
     public void asignarRutas() {
-        int contadorAutos = 0;
+        int contadorV1 = 0;
         System.out.println("Asignar rutas: ");
         System.out.println("cantV1: " + cantVehiculos1);
         System.out.println("cantV2: " + cantVehiculos2);
@@ -369,7 +369,7 @@ public class Solucion {
         System.out.println("cantV4: " + cantVehiculos4);
 
         for (Vehicle vehiculo : listaVehiculos) {
-            if (contadorAutos == cantidadTotal)
+            if (contadorV1 == cantidadTotal)
                 break;
             int minimo = Integer.MAX_VALUE;
             int contador = 0;
@@ -384,14 +384,15 @@ public class Solucion {
             if (minCont == -1)
                 break;
             listaRutas.get(minCont).setVehiculo(vehiculo);
-            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorAutos));
+            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorV1));
             System.out.println("MinCont: " + minCont);
             System.out.println("Auto: " + listaRutas.get(minCont).getVehiculo());
-            contadorAutos++;
+            contadorV1++;
         }
 
+        int contadorV2 = 0;
         for (Vehicle vehiculo : listaVehiculos) {
-            if (contadorAutos == cantidadTotal)
+            if (contadorV2 == cantidadTotal)
                 break;
             int minimo = Integer.MAX_VALUE;
             int contador = 0;
@@ -406,14 +407,15 @@ public class Solucion {
             if (minCont == -1)
                 break;
             listaRutas.get(minCont).setVehiculo(vehiculo);
-            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorAutos));
+            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorV2));
             System.out.println("MinCont: " + minCont);
             System.out.println("Auto: " + listaRutas.get(minCont).getVehiculo());
-            contadorAutos++;
+            contadorV2++;
         }
 
+        int contadorV3 = 0;
         for (Vehicle vehiculo : listaVehiculos) {
-            if (contadorAutos == cantidadTotal)
+            if (contadorV3 == cantidadTotal)
                 break;
             int minimo = Integer.MAX_VALUE;
             int contador = 0;
@@ -428,14 +430,15 @@ public class Solucion {
             if (minCont == -1)
                 break;
             listaRutas.get(minCont).setVehiculo(vehiculo);
-            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorAutos));
+            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorV3));
             System.out.println("MinCont: " + minCont);
             System.out.println("Auto: " + listaRutas.get(minCont).getVehiculo());
-            contadorAutos++;
+            contadorV3++;
         }
 
+        int contadorV4 = 0;
         for (Vehicle vehiculo : listaVehiculos) {
-            if (contadorAutos == cantidadTotal)
+            if (contadorV4 == cantidadTotal)
                 break;
             int minimo = Integer.MAX_VALUE;
             int contador = 0;
@@ -450,10 +453,10 @@ public class Solucion {
             if (minCont == -1)
                 break;
             listaRutas.get(minCont).setVehiculo(vehiculo);
-            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorAutos));
+            listaRutas.get(minCont).setVehiculo(listaVehiculos.get(contadorV4));
             System.out.println("MinCont: " + minCont);
             System.out.println("Auto: " + listaRutas.get(minCont).getVehiculo());
-            contadorAutos++;
+            contadorV4++;
         }
 
 //TODO REVISAR ESTO
