@@ -29,7 +29,7 @@ public class Reader {
                 pedidosList.add(pedido);
             }
             myReader.close();
-
+            return pedidosList;
         } catch (FileNotFoundException e) {
             System.out.println("Ocurrio un error");
             e.printStackTrace();
@@ -46,8 +46,9 @@ public class Reader {
         line = line.substring(line.indexOf(':') + 1);
         int mm = getIntFromLine(line, ",");
         line = line.substring(line.indexOf(',') + 1);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m:s");
-        LocalDateTime fechaPedido = LocalDateTime.parse(strDate + " " + dia + " " + hh + ":" + mm + ":0", formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d H:m:s");
+        String cadenaFecha = strDate + "-" + dia + " " + hh + ":" + mm + ":0";
+        LocalDateTime fechaPedido = LocalDateTime.parse(cadenaFecha, formatter);
         pedido.setFechaPedido(fechaPedido);
 
         // set nodo
@@ -72,7 +73,7 @@ public class Reader {
 
     private static String obtenerFechaNombrePedido(String name) {
 
-        String strDate = name.substring(6, 10) + "-" + name.substring(9, 11);
+        String strDate = name.substring(6, 10) + "-" + name.substring(10, 12);
         return strDate;
     }
 
