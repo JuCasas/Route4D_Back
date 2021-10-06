@@ -154,6 +154,14 @@ public class Pedido implements Comparable<Pedido> {
         return this.cordX + 71 * this.cordY + 1;
     }
 
+    public void setCordX(int cordX) {
+        this.cordX = cordX;
+    }
+
+    public void setCordY(int cordY) {
+        this.cordY = cordY;
+    }
+
     @Override
     public int compareTo(Pedido o) {
         if (this.tiempoLimite == o.tiempoLimite) {

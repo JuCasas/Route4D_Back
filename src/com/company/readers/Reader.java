@@ -14,14 +14,26 @@ import java.util.Scanner;
 
 public class Reader {
     public static List<Vehicle> leerVehiculos() {
-        return null;
+        List<Vehicle> camiones = new ArrayList<>();
+
+        // Agregando camiones
+        Vehicle camion1 = new Vehicle(1, 20, 1, 20, "ABC001", 1, 50);
+        Vehicle camion2 = new Vehicle(2, 15, 2, 20, "ABC002", 1, 50);
+        Vehicle camion3 = new Vehicle(3, 25, 3, 20, "ABC003", 1, 50);
+        Vehicle camion4 = new Vehicle(4, 30, 4, 20, "ABC004", 1, 50);
+        camiones.add(camion1);
+        camiones.add(camion2);
+        camiones.add(camion3);
+        camiones.add(camion4);
+
+        return camiones;
     }
 
     public static List<Pedido> obtenerListaPedidos() {
+        List<Pedido> pedidosList = new ArrayList<>();
         try {
             File archivo = new File("src/com/company/resources/ventas202109.txt");
             Scanner myReader = new Scanner(archivo);
-            List<Pedido> pedidosList = new ArrayList<>();
             String strDate = obtenerFechaNombrePedido(archivo.getName());
             while (myReader.hasNextLine()) {
                 String line = myReader.nextLine();
@@ -34,7 +46,7 @@ public class Reader {
             System.out.println("Ocurrio un error");
             e.printStackTrace();
         }
-        return null;
+        return pedidosList;
     }
 
     private static Pedido getPedidoFromLine(String line, String strDate) {
@@ -56,6 +68,8 @@ public class Reader {
         line = line.substring(line.indexOf(',') + 1);
         int y = getIntFromLine(line, ",");
         line = line.substring(line.indexOf(',') + 1);
+        pedido.setCordX(x);
+        pedido.setCordY(y);
         pedido.setIdDestino(x + 71 * y + 1);
 
         // set cant Pedido m3
@@ -85,7 +99,7 @@ public class Reader {
     public static List<Bloqueos> obtenerCallesBloqueadas() {
         List<Bloqueos> listaBloqueos = new ArrayList<>();
         try {
-            File archivo = new File("src/resources/bloqueos202109.txt");
+            File archivo = new File("src/com/company/resources/bloqueos202109.txt");
             Scanner myReader = new Scanner(archivo);
             List<IntervaloB> listaIntervalos = new ArrayList<>();
 
@@ -112,12 +126,13 @@ public class Reader {
                         data = data.substring(indexChar + 1);
                     }
                     intervaloNodo.setNodo_id(x + 71 * y + 1);
-                    intervaloNodo.setIntervalo_id(intervalo.getId());
+                    intervalo.setId(x + 73 * y + 2);
+                    Integer intervaloId = intervalo.getId();
+                    intervaloNodo.setIntervalo_id(intervaloId);
                     listaIntervalosN.add(intervaloNodo);
                     Bloqueos cb = new Bloqueos(intervalo.getId(), convertLocalDateToMinutes(intervalo.getInicio()),
                             convertLocalDateToMinutes(intervalo.getFin()));
                     listaBloqueos.add(cb);
-
                 }
             }
             myReader.close();
@@ -158,7 +173,9 @@ public class Reader {
     }
 
     private static String obtenerFechaNombre(String nombre) {
-        return nombre.substring(8, 11) + "-" + nombre.substring(11, 13);
+        String parte1 = nombre.substring(8, 12);
+        String parte2 = nombre.substring(12, 14);
+        return parte1 + "-" + parte2;
     }
 
     // lectura de vehiculos

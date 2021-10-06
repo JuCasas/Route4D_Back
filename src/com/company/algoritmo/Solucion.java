@@ -35,11 +35,12 @@ public class Solucion {
         listaVehiculos = Reader.leerVehiculos();
         listaPedidos = Reader.obtenerListaPedidos();
         // obtener lista mantenimientos
-        if (listaVehiculos.size() == 0)
+        if (listaVehiculos == null)
             return "No hay vehículos disponibles para las rutas";
-        if (listaPedidos.size() == 0)
+        if (listaPedidos == null)
             return "No hay pedidos en cola";
         obtenerCantidadClusters();
+        listaClusters = inicializarClusters(listaVehiculos);
         kmeans = new Kmeans(cantVehiculos1, cantVehiculos2, cantVehiculos3, cantVehiculos4);
         listaBloqueos = Reader.obtenerCallesBloqueadas();
         obtenerListaAdyacente();
